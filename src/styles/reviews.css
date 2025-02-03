@@ -1,0 +1,91 @@
+.reviews h1 {
+    font-size: 36px;
+    font-weight: 700;
+    position: relative;
+    bottom: 50px;
+    color: #3d3131;
+    justify-content: center;
+}
+.reviews{
+    background-color: white;
+}
+
+.review-container img {
+    width: 450px;
+    height: 200px;
+}
+
+.review-item {
+    height: 230px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: rgb(125, 90, 158);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.review-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+}
+
+.reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.reviewer-name {
+    font-weight: bold;
+    width: 25%;
+}
+
+.review-meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: white;
+}
+
+.rating {
+    margin-bottom: 10px;
+    color: #f0ad4e;
+    /* Gold color for stars */
+}
+
+.rating i {
+    margin: 0 2px;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: row;
+}
+
+#review {
+    width: 500px;
+
+}
+
+.review-section {
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.description {
+    color: white;
+}

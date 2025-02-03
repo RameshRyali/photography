@@ -1,0 +1,74 @@
+:root {
+    --main-color: violet;
+    --text-color: black;
+    --second-color: blue;
+    --gradient: linear-gradient(lightgreen, rgb(209, 190, 15));
+
+}
+.text {
+    text-align: center;
+    margin-bottom: -50px;
+}
+.text h1 {
+    align-items: center;
+    font-size: 2.5rem;
+    color: #333;
+}
+.text p {
+    font-size: x-large;
+    font-weight: bolder;
+    color: #e51515;
+}
+.about {
+    background: white;
+    padding-top: 50px;
+    padding-bottom: 20px;
+
+    /* border: 5px solid black; */
+
+
+}
+.about-container {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    gap: 1rem;
+    margin-top: 70px;
+
+}
+
+.about-container p {
+    color: var(--gradient);
+    font-size: large;
+    font-weight: bold;
+}
+
+.about-container .box {
+    padding: 30px;
+    border-radius: 1rem;
+    box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
+    background: rgb(215, 174, 136);
+    height: 250px;
+
+}
+
+.about-container .box .bx {
+    font-size: 34px;
+    padding: 10px;
+    background: #5a6d92;
+    border-radius: 0.5rem;
+    color: var(--main-color);
+}
+
+.about-container .box .bx:hover,
+.ride-container .bx .wallet {
+    background: var(--gradient);
+    color: #fff;
+}
+svg{
+    height: 40px;
+    width: 15%;
+}
+.about-container .box:hover{
+    transform: translateY(10px);
+    background:white;
+}

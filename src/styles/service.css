@@ -1,0 +1,123 @@
+/* General Styling */
+.services {
+    background-color: white;
+    padding: 60px 20px;
+    text-align: center;
+    /* border: 5px solid black; */
+}
+
+.services h1 {
+    align-items: center;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.services p {
+    font-size: 1.2rem;
+    color: #c52121;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+
+}
+
+/* Services Container */
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+    gap: 30px; /* Space between cards */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Individual Service Cards */
+.service-card {
+    background: linear-gradient(135deg, #f0c27b, #4b1248); /* Attractive gradient */
+    color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Title */
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: rgb(32, 254, 36);
+}
+
+/* Card Image */
+.service-card .service-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-image {
+    transform: scale(1.1);
+}
+
+/* Card Text */
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    color:white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .services h1 {
+        font-size: 2rem;
+    }
+
+    .services p {
+        font-size: 1rem;
+    }
+
+    .service-card {
+        padding: 15px;
+    }
+
+    .service-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .service-card .service-image {
+        height: 180px;
+    }
+
+    .service-card p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .services h1 {
+        font-size: 1.8rem;
+    }
+
+    .services p {
+        font-size: 0.9rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .service-card p {
+        font-size: 0.8rem;
+    }
+}
