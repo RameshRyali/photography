@@ -1,152 +1,155 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 import React, { useState } from "react";
-import { FaEnvelope, FaLock, FaPhone, FaUser } from "react-icons/fa"; // Import icons
-import { auth, db } from "../firebaseconfig";
-import '../styles/login.css';
 
-function AuthForm() {
-    const [isLogin, setIsLogin] = useState(true);
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-        name: "",
-        phone: "",
-    });
+const PhotographersDashboard = () => {
+  const [activeSection, setActiveSection] = useState("View Photographers");
 
-    const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const { email, password, name, phone } = formData;
-
-        if (isLogin) {
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                alert("Login successful");
-            } catch (error) {
-                alert("Error logging in: " + error.message);
-            }
-        } else {
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                await addDoc(collection(db, "userdetails"), {
-                    uid: user.uid,
-                    name,
-                    email,
-                    phone,
-                    password,
-                    createdAt: new Date(),
-                });
-
-                alert("Registration successful");
-            } catch (error) {
-                alert("Error signing up: " + error.message);
-            }
-        }
-    };
-
-    return (
-        <div className="auth-container">
-            <div className="form-container">
-                <div className="tab-header">
-                    <button
-                        className={isLogin ? "active" : ""}
-                        onClick={() => setIsLogin(true)}
-                    >
-                        Login
-                    </button>
-                    <button
-                        className={!isLogin ? "active" : ""}
-                        onClick={() => setIsLogin(false)}
-                    >
-                        Sign Up
-                    </button>
+  const renderContent = () => {
+    switch (activeSection) {
+      case "Add Photographer":
+        return (
+          <div className="add-photographer-form">
+            <h1>Add Photographer</h1>
+            <form>
+              <div className="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="Enter name" required />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="Enter email" required />
+              </div>
+              <div className="form-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="Enter phone number" required />
+              </div>
+              <div className="form-group">
+                <label>Location</label>
+                <input type="text" placeholder="Enter location" required />
+              </div>
+              <div className="form-group">
+                <label>Specialization</label>
+                <input type="text" placeholder="Enter specialization" required />
+              </div>
+              <div className="form-group">
+                <label>Experience</label>
+                <input type="number" placeholder="Enter experience in years" required />
+              </div>
+              <div className="form-group">
+                <label>Availability</label>
+                <input type="text" placeholder="Enter availability" required />
+              </div>
+              <div className="form-group">
+                <label>Pricing</label>
+                <input type="number" placeholder="Enter starting price" required />
+              </div>
+              <button type="submit" className="add-btn">Add Photographer</button>
+            </form>
+          </div>
+        );
+      case "View Photographers":
+        return (
+          <div>
+            <h1>Our Photographers</h1>
+            <div className="photographers-container">
+              {/* Photographer Card 1 */}
+              <div className="photographer-card">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Sarah Johnson"
+                  className="photographer-image"
+                />
+                <div className="photographer-details">
+                  <h3>Sarah Johnson</h3>
+                  <p className="specialty">Wedding Photography</p>
+                  <p><i className="location">New York, NY</i></p>
+                  <p>+1 (555) 123-4567</p>
+                  <p>8 years experience</p>
+                  <p>Availability: Weekends</p>
+                  <p>Starting from <span className="price">$500</span></p>
                 </div>
-
-                <form onSubmit={handleSubmit} className="active">
-                    {!isLogin && (
-                        <div className="form-group">
-                            <label htmlFor="name">
-                                <FaUser className="icon" /> Full Name
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Enter your full name"
-                                value={formData.name}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    )}
-
-                    {!isLogin && (
-                        <div className="form-group">
-                            <label htmlFor="phone">
-                                <FaPhone className="icon" /> Phone
-                            </label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="Enter your phone number"
-                                maxLength="10"
-                                pattern="[0-9]{10}"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    )}
-
-                    <div className="form-group">
-                        <label htmlFor="email">
-                            <FaEnvelope className="icon" /> Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password">
-                            <FaLock className="icon" /> Password
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-
-                    <div className="buttons">
-                        <button type="submit" className="btn-primary">
-                            {isLogin ? "Login" : "Sign Up"}
-                        </button>
-                        <button type="reset" className="btn-secondary" onClick={() => setFormData({ email: "", password: "", name: "", phone: "" })}>
-                            Cancel
-                        </button>
-                    </div>
-                </form>
+                <div className="actions">
+                  <button className="edit-btn">Edit</button>
+                  <button className="delete-btn">Delete</button>
+                </div>
+              </div>
+              {/* Photographer Card 2 */}
+              <div className="photographer-card">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Michael Chen"
+                  className="photographer-image"
+                />
+                <div className="photographer-details">
+                  <h3>Michael Chen</h3>
+                  <p className="specialty">Portrait & Fashion</p>
+                  <p><i className="location">San Francisco, CA</i></p>
+                  <p>+1 (555) 987-6543</p>
+                  <p>6 years experience</p>
+                  <p>Availability: Mon-Sat</p>
+                  <p>Starting from <span className="price">$300</span></p>
+                </div>
+                <div className="actions">
+                  <button className="edit-btn">Edit</button>
+                  <button className="delete-btn">Delete</button>
+                </div>
+              </div>
             </div>
-        </div>
-    );
-}
+          </div>
+        );
+      case "Bookings":
+        return (
+          <div>
+            <h1>Bookings</h1>
+            <p>Manage your bookings here.</p>
+          </div>
+        );
+      case "Gallery":
+        return (
+          <div>
+            <h1>Gallery</h1>
+            <p>Manage the photo gallery here.</p>
+          </div>
+        );
+      default:
+        return <h1>Welcome to the Admin Panel</h1>;
+    }
+  };
 
-export default AuthForm;
+  return (
+    <div className="admin-panel">
+      <aside className="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+          <li
+            className={activeSection === "View Photographers" ? "active" : ""}
+            onClick={() => setActiveSection("View Photographers")}
+          >
+            View Photographers
+          </li>
+          <li
+            className={activeSection === "Add Photographer" ? "active" : ""}
+            onClick={() => setActiveSection("Add Photographer")}
+          >
+            Add Photographer
+          </li>
+          <li
+            className={activeSection === "Bookings" ? "active" : ""}
+            onClick={() => setActiveSection("Bookings")}
+          >
+            Bookings
+          </li>
+          <li
+            className={activeSection === "Gallery" ? "active" : ""}
+            onClick={() => setActiveSection("Gallery")}
+          >
+            Gallery
+          </li>
+        </ul>
+      </aside>
+      <main className="main-content">{renderContent()}</main>
+    </div>
+  );
+};
+
+export default PhotographersDashboard;
+
